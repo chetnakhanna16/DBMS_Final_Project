@@ -1,0 +1,133 @@
+Create database Group3_PropertyManagementSystem; 
+
+Use databse Group3_PropertyManagementSystem;
+
+Create table Blocks
+(BlockID int Primary Key,
+BlockName varchar(45) Not Null);
+
+Create table Apartments
+(ApartmentID int Primary Key,
+ApartmentName varchar(45) Not Null,
+ApartmentTotalArea int Not Null,
+ApartmentType varchar(45) Not Null,
+ApartmentRent int Not Null,
+ApartmentPortfolioID int References dbo.ApartmentPortfolio,
+BlockID int References dbo.Blocks(BlockID));
+
+Create table Appliances
+(ApplianceID int Primary Key,
+ApplianceName varchar(45),
+ApplianceDescription varchar(45),
+ApartmentID int References dbo.Apartments(ApartmentID));
+
+Create table Utilities
+(UtilityID int Primary Key,
+UtilityName varchar(45),
+UtilityDescription varchar(45),
+UtilityCharge int,
+ApartmentID int References dbo.Apartments(ApartmentID));
+
+Create table Insurance
+(InsuranceID int Primary Key,
+InsurancePolicyNumber int Not Null,
+InsuranceProvider varchar(45),
+InsuranceName varchar(45) Not Null,
+InsurancePremium int Not Null,
+InsuranceType varchar(45),
+InsuranceDescription varchar(45),
+InsuranceDuration year(4),
+InsuranceStartDate date,
+InsuranceEndDate date,
+ApartmentID int References dbo.Apartments(ApartmentID));
+
+Create table ApartmentMaintenanceRecords
+(ApartmentMaintenanceRecordID int Primary Key,
+ApartmentMaintenanceRecordDate date,
+ApartmentMaintenanceRecordDescription varchar(250),
+ApartmentID int References dbo.Apartments(ApartmentID));
+
+Create table ApartmentAddress
+(ApartmentAddressID int Primary Key,
+AddressLine1 varchar(45),
+AddressLine2 varchar(45),
+City varchar(45),
+State varchar(45),
+Country varchar(45),
+Zipcode int,
+PostboxNumber int,
+ApartmentID int References dbo.Apartments(ApartmentID));
+
+Create table Amenities
+(AmenityID int Primary Key,
+AmenityName varchar(45),
+AmenityDescription varchar(45),
+AmenityCharge int,
+ApartmentID int References dbo.Apartments(ApartmentID));
+
+Create table Billing
+(BillingID int Primary Key,
+BillingAmount int Not Null,
+BillingDate date Not Null,
+BillingDueDate date Not Null,
+ResidentID int References dbo.Residents(ResidentID));
+
+Create table Payments
+(PaymentID int Primary Key,
+PaymentMode varchar(45),
+PaymentStatus varchar(45),
+PaymentMade int,
+PaymentDue int,
+PaymentDate date,
+BillingID int References dbo.Billing(BillingID));
+
+Create table ApartmentPortfolio
+(ApartmentPortfolioID int Primary Key,
+ApartmentAvailabilityStatus varchar(45) Not Null,
+ApartmentAvailabilityDate date,
+ApartmentPromotionID int);
+
+Create table ApartmentPromotions
+(ApartmentPromotionID int Primary Key,
+ApartmentPromotionType varchar(45),
+ApartmentPromotionDescription varchar(45),
+ApartmentPromotionStartDate date,
+ApartmentPromotionEndDate date);
+
+Create table Residents
+(ResidentID int Primary Key,
+ResidentFirstName varchar(45),
+ResidentLastName varchar(45),
+ResidentContactNumber int,
+ResidentEmailAddress varchar(45), 
+ResidentDOB date,
+ResidentBloodType varchar(45),
+ApartmentID int References dbo.Apartments(ApartmentID));
+
+Create table ParkingLots
+(ParkingLotID int Primary Key,
+ParkingLotName varchar(45),
+ParkingLotRent int,
+ResidentID int References dbo.Resident(ResidentID));
+
+Create table Pets
+(PetID int Primary Key,
+PetType varchar(45),
+PetRent int,
+ResidentID int References dbo.Resident(ResidentID));
+
+Create table Lease
+(LeaseID int Primary Key,
+LeaseDate date,
+LeaseStartDate date,
+LeaseEndDate date,
+LeaseDuration year(4),
+ResidentID int References dbo.Resident(ResidentID),
+StaffMemberID int References dbo.StaffMembers(StaffMemberID));
+
+Create table 
+
+
+
+
+
