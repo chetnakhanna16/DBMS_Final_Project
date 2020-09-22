@@ -2,4 +2,6 @@
 
 Group Project
 
+### Entity Relationship Diagram
+
 ![Property Management System Entity Relationship Diagram](PMS_ERD.png)
